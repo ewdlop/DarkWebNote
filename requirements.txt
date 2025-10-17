@@ -1,0 +1,11 @@
+# Dark RAG System Dependencies
+# No external dependencies required for basic functionality
+# Optional dependencies for enhanced features:
+
+# For advanced embeddings (optional):
+# sentence-transformers>=2.2.0
+# numpy>=1.24.0
+
+# For vector search (optional):
+# faiss-cpu>=1.7.4
+# chromadb>=0.4.0
