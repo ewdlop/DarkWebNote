@@ -102,18 +102,20 @@ class DarkRAG:
     def __init__(self, knowledge_base: Optional[DarkKnowledgeBase] = None):
         self.knowledge_base = knowledge_base or DarkKnowledgeBase()
     
-    def augment(self, query: str, top_k: int = 3) -> str:
+    def augment(self, query: str, retrieved_docs: Optional[List[DarkDocument]] = None, top_k: int = 3) -> str:
         """
         Augment a query with retrieved context from the dark knowledge base
         
         Args:
             query: The input query
-            top_k: Number of documents to retrieve
+            retrieved_docs: Pre-retrieved documents (optional, will retrieve if not provided)
+            top_k: Number of documents to retrieve (used only if retrieved_docs is None)
             
         Returns:
             Augmented prompt with retrieved context
         """
-        retrieved_docs = self.knowledge_base.retrieve(query, top_k=top_k)
+        if retrieved_docs is None:
+            retrieved_docs = self.knowledge_base.retrieve(query, top_k=top_k)
         
         if not retrieved_docs:
             return query
@@ -143,7 +145,7 @@ Please provide a response informed by the context above."""
         Returns both the augmented prompt and retrieved documents
         """
         retrieved_docs = self.knowledge_base.retrieve(query, top_k=top_k)
-        augmented_prompt = self.augment(query, top_k=top_k)
+        augmented_prompt = self.augment(query, retrieved_docs=retrieved_docs)
         
         return {
             'query': query,
