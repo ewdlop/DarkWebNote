@@ -1,6 +1,28 @@
 # DarkWebNote
 
-Dark-ChatGPt:
+## Dark RAG System
+
+This repository now includes **Dark RAG** - a Retrieval-Augmented Generation system inspired by the metaphors of dark web, dark matter, and dark energy.
+
+### Quick Start
+
+```python
+from dark_rag import DarkRAG, initialize_dark_knowledge_base
+
+# Initialize with pre-configured dark web knowledge
+kb = initialize_dark_knowledge_base()
+dark_rag = DarkRAG(knowledge_base=kb)
+
+# Query the system
+result = dark_rag.generate("What is the relationship between dark web and dark matter?")
+print(result['augmented_prompt'])
+```
+
+See [DARK_RAG.md](DARK_RAG.md) for complete documentation.
+
+---
+
+## Dark-ChatGPt:
 
 **Dark Web（暗網）** 和 **Dark Energy / Dark Matter（暗能量 / 暗物質 / 暗部門）** 放在一起，比較像是一種哲學或隱喻性的思考，而不是物理學裡的標準對應。不過我們可以從幾個角度來解釋這個對照：
 
