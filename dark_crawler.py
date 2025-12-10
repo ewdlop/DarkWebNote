@@ -6,7 +6,7 @@ Themed around the Dark Web metaphor of discovering hidden knowledge
 import re
 import time
 import hashlib
-from typing import List, Dict, Any, Optional, Set
+from typing import List, Dict, Any, Optional, Set, Tuple
 from urllib.parse import urljoin, urlparse
 from urllib.request import urlopen, Request
 from urllib.error import URLError, HTTPError
@@ -152,7 +152,7 @@ class DarkCrawler:
         except (URLError, HTTPError, Exception):
             return None
     
-    def extract_content(self, html: str, base_url: str) -> tuple[str, Optional[str], List[str]]:
+    def extract_content(self, html: str, base_url: str) -> Tuple[str, Optional[str], List[str]]:
         """
         Extract text content, title, and links from HTML
         
