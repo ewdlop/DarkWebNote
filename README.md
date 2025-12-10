@@ -2,9 +2,9 @@
 
 ## Dark RAG System
 
-This repository now includes **Dark RAG** - a Retrieval-Augmented Generation system inspired by the metaphors of dark web, dark matter, and dark energy.
+This repository includes **Dark RAG** - a Retrieval-Augmented Generation system inspired by the metaphors of dark web, dark matter, and dark energy.
 
-### Quick Start
+### Quick Start - Dark RAG
 
 ```python
 from dark_rag import DarkRAG, initialize_dark_knowledge_base
@@ -19,6 +19,64 @@ print(result['augmented_prompt'])
 ```
 
 See [DARK_RAG.md](DARK_RAG.md) for complete documentation.
+
+## Dark Web Crawler
+
+This repository also includes **Dark Crawler** - a web crawling system for discovering and collecting hidden knowledge to populate the Dark Knowledge Base.
+
+### Quick Start - Dark Crawler
+
+```python
+from dark_crawler import DarkCrawler, create_domain_filter
+from dark_rag import DarkKnowledgeBase
+
+# Create crawler
+crawler = DarkCrawler(
+    delay=2.0,      # 2 seconds between requests
+    max_depth=2,    # Crawl 2 levels deep
+    max_pages=50    # Maximum 50 pages
+)
+
+# Create knowledge base
+kb = DarkKnowledgeBase(storage_path="crawled_knowledge.json")
+
+# Crawl and store (use responsibly!)
+domain_filter = create_domain_filter(['example.com'])
+stats = crawler.crawl_and_store(
+    seed_urls=['https://example.com/docs'],
+    knowledge_base=kb,
+    filter_func=domain_filter
+)
+
+print(f"Stored {stats['stored']} documents in knowledge base")
+```
+
+See [DARK_CRAWLER.md](DARK_CRAWLER.md) for complete documentation.
+
+## Complete Workflow
+
+Combine the crawler and RAG system:
+
+```python
+from dark_crawler import DarkCrawler, create_domain_filter
+from dark_rag import DarkKnowledgeBase, DarkRAG
+
+# 1. Crawl content
+crawler = DarkCrawler(delay=2.0, max_pages=100)
+kb = DarkKnowledgeBase(storage_path="my_knowledge.json")
+
+domain_filter = create_domain_filter(['docs.example.com'])
+stats = crawler.crawl_and_store(
+    seed_urls=['https://docs.example.com'],
+    knowledge_base=kb,
+    filter_func=domain_filter
+)
+
+# 2. Query with Dark RAG
+dark_rag = DarkRAG(knowledge_base=kb)
+result = dark_rag.generate("How do I configure the API?")
+print(result['augmented_prompt'])
+```
 
 ---
 
