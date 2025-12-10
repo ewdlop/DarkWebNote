@@ -193,15 +193,16 @@ def test_crawl_and_store_integration():
         
         # Create a mock crawler result manually
         # (We won't actually crawl URLs in tests to avoid network dependencies)
+        test_content = "This is test content about dark web crawling and knowledge extraction."
         result = CrawlResult(
             url="https://example.com/test",
-            content="This is test content about dark web crawling and knowledge extraction.",
+            content=test_content,
             title="Test Page",
             metadata={
                 'url': 'https://example.com/test',
                 'title': 'Test Page',
                 'crawled_at': 1234567890,
-                'content_length': 68,
+                'content_length': len(test_content),
                 'num_links': 0
             },
             links=[],
@@ -221,15 +222,16 @@ def test_crawl_and_store_integration():
         
         # For this test, content is less than 100 chars, so it won't be added
         # Let's create a longer content result
+        long_content = "This is a much longer piece of content about dark web crawling. " * 5
         long_result = CrawlResult(
             url="https://example.com/long",
-            content="This is a much longer piece of content about dark web crawling. " * 5,
+            content=long_content,
             title="Long Test Page",
             metadata={
                 'url': 'https://example.com/long',
                 'title': 'Long Test Page',
                 'crawled_at': 1234567890,
-                'content_length': 320,
+                'content_length': len(long_content),
                 'num_links': 2
             },
             links=[],
