@@ -1,3 +1,6 @@
 [submodule "JokeAPI"]
 	path = JokeAPI
 	url = https://github.com/Sv443-Network/JokeAPI
+[submodule "JokeAPI-v2"]
+	path = JokeAPI-v2
+	url = https://git.sv443.net/Sv443/JokeAPI-v2.git
